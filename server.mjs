@@ -9,7 +9,12 @@ dotenv.config();
 const app = express(); // ✅ Initialize app first
 app.use(cors({ origin: '*' })); // ✅ Then use cors
 
-const PORT = process.env.PORT || 3000;
+//const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
+if (!PORT) {
+  throw new Error('PORT not defined. Required for Render.');
+}
+app.listen(PORT, () => console.log(`Running on port ${PORT}`));
 
 
 function countDeliveryDates(orders) {
